@@ -1,0 +1,36 @@
+<div class="my-posts">
+  <div class="header">
+    <h2>My Posts</h2>
+    <a routerLink="/posts/new" class="new-btn">+ New Post</a>
+  </div>
+
+  @if (loading) {
+    <p>Loading...</p>
+  } @else if (myPosts.length === 0) {
+    <p>You haven't written any posts yet. Get started now!</p>
+  } @else {
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Likes</th>
+          <th>Published</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (post of myPosts; track post._id) {
+          <tr>
+            <td><a [routerLink]="['/posts', post._id]">{{ post.title }}</a></td>
+            <td>{{ post.likes.length }}</td>
+            <td>{{ post.createdAt | date: 'shortDate' }}</td>
+            <td class="row-actions">
+              <a [routerLink]="['/posts', post._id, 'edit']">Edit</a>
+              <button (click)="deletePost(post._id)">Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

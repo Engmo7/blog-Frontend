@@ -1,0 +1,33 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Edit Post' : 'New Post' }}</h2>
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+
+  <form (ngSubmit)="onSubmit()">
+    <label>
+      Title
+      <input type="text" name="title" [(ngModel)]="title" required />
+    </label>
+
+    <label>
+      Content
+      <textarea name="content" [(ngModel)]="content" required rows="8"></textarea>
+    </label>
+
+    <label>
+      Cover image URL (optional)
+      <input type="text" name="coverImage" [(ngModel)]="coverImage" />
+    </label>
+
+    <label>
+      Tags (comma-separated)
+      <input type="text" name="tags" [(ngModel)]="tagsInput" placeholder="tech, programming, life" />
+    </label>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Saving...' : (isEditMode ? 'Save Changes' : 'Publish Post') }}
+    </button>
+  </form>
+</div>

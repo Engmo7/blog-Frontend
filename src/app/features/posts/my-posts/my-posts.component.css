@@ -1,0 +1,48 @@
+.my-posts {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.new-btn {
+  background-color: #2563eb;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: right;
+  padding: 0.6rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.row-actions a {
+  color: #2563eb;
+}
+
+.row-actions button {
+  background: none;
+  border: none;
+  color: #b91c1c;
+  cursor: pointer;
+}

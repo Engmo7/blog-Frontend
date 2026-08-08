@@ -1,0 +1,48 @@
+<div class="post-detail">
+  @if (loading) {
+    <p>Loading...</p>
+  } @else if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  } @else if (post) {
+    <article>
+      <h1>{{ post.title }}</h1>
+      <p class="meta">By {{ post.author.name }} — {{ post.createdAt | date: 'mediumDate' }}</p>
+
+      <p class="content">{{ post.content }}</p>
+
+      <div class="actions">
+        <button (click)="toggleLike()" [class.liked]="hasLiked()">
+          {{ hasLiked() ? '❤ Unlike' : '🤍 Like' }} ({{ post.likes.length }})
+        </button>
+
+        @if (isOwner()) {
+          <a [routerLink]="['/posts', post._id, 'edit']">Edit</a>
+          <button (click)="deletePost()" class="danger">Delete</button>
+        }
+      </div>
+    </article>
+
+    <section class="comments">
+      <h3>Comments ({{ comments.length }})</h3>
+
+      @if (authService.isLoggedIn()) {
+        <div class="add-comment">
+          <textarea [(ngModel)]="newComment" placeholder="Write your comment..."></textarea>
+          <button (click)="submitComment()">Add Comment</button>
+        </div>
+      } @else {
+        <p><a routerLink="/login">Log in</a> to leave a comment.</p>
+      }
+
+      @for (comment of comments; track comment._id) {
+        <div class="comment">
+          <p class="comment-author">{{ comment.author.name }}</p>
+          <p class="comment-content">{{ comment.content }}</p>
+          @if (isCommentOwner(comment)) {
+            <button (click)="deleteComment(comment._id)" class="delete-comment">Delete</button>
+          }
+        </div>
+      }
+    </section>
+  }
+</div>

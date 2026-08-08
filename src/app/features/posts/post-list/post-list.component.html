@@ -1,0 +1,28 @@
+<div class="feed">
+  <h2>Latest Posts</h2>
+
+  @if (loading) {
+    <p>Loading...</p>
+  } @else if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  } @else if (posts.length === 0) {
+    <p>No posts yet.</p>
+  } @else {
+    <div class="post-grid">
+      @for (post of posts; track post._id) {
+        <a [routerLink]="['/posts', post._id]" class="post-card">
+          <h3>{{ post.title }}</h3>
+          <p class="meta">By {{ post.author.name }}</p>
+          <p class="excerpt">{{ post.content.slice(0, 120) }}...</p>
+          <p class="likes">❤ {{ post.likes.length }}</p>
+        </a>
+      }
+    </div>
+
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="page === 1">Previous</button>
+      <span>Page {{ page }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+    </div>
+  }
+</div>

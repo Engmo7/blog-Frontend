@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <a routerLink="/" class="brand">Blog Platform</a>
+
+  <div class="links">
+    <a routerLink="/">Feed</a>
+
+    @if (authService.currentUser()) {
+      <a routerLink="/my-posts">My Posts</a>
+      <a routerLink="/posts/new">New Post</a>
+      <span class="user-name">{{ authService.currentUser()?.name }}</span>
+      <button (click)="logout()">Logout</button>
+    } @else {
+      <a routerLink="/login">Login</a>
+      <a routerLink="/register">Register</a>
+    }
+  </div>
+</nav>
