@@ -5,6 +5,9 @@
     <p class="error">{{ errorMessage }}</p>
   } @else if (post) {
     <article>
+      @if (post.coverImage) {
+  <img [src]="post.coverImage" alt="Cover image" class="cover-image" />
+}
       <h1>{{ post.title }}</h1>
       <p class="meta">By {{ post.author.name }} — {{ post.createdAt | date: 'mediumDate' }}</p>
 
